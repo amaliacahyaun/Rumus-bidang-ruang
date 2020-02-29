@@ -5,6 +5,7 @@
  */
 
 package tugas1;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  *
@@ -18,17 +19,22 @@ public class Tugas1 {
         System.out.println("1.Balok");
         System.out.println("2.Kerucut");
         System.out.println("3.Limas Segitiga");
-        
+        //pilih 4 akan masuk exception
          Scanner pilih;
                 pilih = new Scanner (System.in);
         System.out.print("PILIH=");
         int Pilih= pilih.nextInt();
         
         switch(Pilih){
+            
             case 1: {
             Rumus1 rumusbalok = new Rumus1();
             System.out.println("BALOK");
             Scanner sisi = new Scanner (System.in);
+            boolean inputan= true;
+            //memasukkan sisi bukan dengan angka akan muncul exception
+            do{
+                try{
             System.out.print("panjang=");
             double panjang= sisi.nextDouble();
             System.out.print("lebar=");
@@ -41,6 +47,15 @@ public class Tugas1 {
         System.out.println("Volume Balok="+ Volume);
         double Luasper = rumusbalok.luasper(panjang,lebar,tinggi);
         System.out.println("Luas Permukaan Balok="+ Luasper);
+            inputan=false;
+            }
+             catch(InputMismatchException ex){
+             System.out.println(ex);
+             System.out.println("coba lagi memasukkan angka bukan huruf");
+             sisi.nextLine(); 
+             }      
+          }while(inputan);
+        
         break;
         }
         
@@ -49,20 +64,31 @@ public class Tugas1 {
             Rumus2 rumuskerucut = new Rumus2();
             System.out.println("KERUCUT");
             Scanner sisi = new Scanner (System.in);
+             boolean inputan= true;
+            //memasukkan sisi bukan dengan angka akan muncul exception
+            do{
+            try{
             System.out.print("jari-jari=");
             double jarijari= sisi.nextDouble();
             System.out.print("tinggi=");
             double tinggi= sisi.nextDouble();
             System.out.println("");
-               
-        double Volume = rumuskerucut.volume(jarijari,tinggi,pi);
-        System.out.println("Volume Kerucut="+ Volume);
-        double SisiS = rumuskerucut.s(jarijari,tinggi);
-        System.out.println("Sisi Selimut="+ SisiS);
-        double Luasper = rumuskerucut.luasper(jarijari,pi,SisiS);
-        System.out.println("Luas Permukaan Kerucut="+ Luasper);
-        break;
+            double Volume = Rumus2.volume(jarijari,tinggi,pi);
+            System.out.println("Volume Kerucut="+ Volume);
+            double SisiS = rumuskerucut.s(jarijari,tinggi);
+            System.out.println("Sisi Selimut="+ SisiS);
+            double Luasper = rumuskerucut.luasper(jarijari,pi,SisiS);
+            System.out.println("Luas Permukaan Kerucut="+ Luasper);
+            inputan=false;
            }
+            catch(IllegalArgumentException ex){
+                System.out.println(ex);
+                }
+            }while(inputan);
+        
+            break;
+           }
+
         
            case 3 :{
             Rumus3 rumuslimas = new Rumus3();
@@ -95,6 +121,13 @@ public class Tugas1 {
        
         break;
            }
+           case 4:
+            try{f();
+            }
+            catch(Exception e){
+            System.out.println(e);
+            }
+            
         }
         System.out.print("Apakah Anda Mau Memilih Menu Lain? (Y/N) ");
         //untuk menginput apakah inhin memilih lagi atau tidak
@@ -103,4 +136,12 @@ public class Tugas1 {
         }
             //ODO code application logic here
             }
+    
+    public static void f() throws NullPointerException, ArrayIndexOutOfBoundsException
+    {
+        //implementasi method
+        //throw new NullPointerException();
+        throw new ArrayIndexOutOfBoundsException();
+    }
         }
+

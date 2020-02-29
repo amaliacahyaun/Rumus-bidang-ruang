@@ -10,8 +10,15 @@ package tugas1;
  * @author DELL
  */
 public class Rumus2 {
-    double volume ( double r,double t,double pi ){
+   static double volume ( double r,double t,double pi )
+         throws IllegalArgumentException {
+        
+    if((r<0) || (t<0) ){
+        throw new IllegalArgumentException("A tidak boleh nol.");
+    }
+    else {
                 return (pi*r*r*t)/3;
+    }
     }
     double s ( double r,double t ){
                 return Math.sqrt(r*r + t*t);
